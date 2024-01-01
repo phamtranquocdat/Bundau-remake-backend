@@ -14,11 +14,21 @@ export const GetAllUsers: RequestHandler = async (req, res, next) => {
 }
 
 export const GetOneUser: RequestHandler = (req, res, next) => {
-    res.json({mess: "Get one users"})
+    try {
+        res.json({mess: "Get one user"})
+    } catch (error) {
+        return res.status(500).json({message: "Internal Server Error"})
+        next(error)
+    }
 }
 
 export const UpdateUser: RequestHandler = (req, res, next) => {
-    res.json({mess: "Update users"})
+    try {
+        res.json({mess: "Update user"})
+    } catch (error) {
+        return res.status(500).json({message: "Internal Server Error"})
+        next(error)
+    }
 }
 
 export const Register: RequestHandler = async (req, res, next) => {

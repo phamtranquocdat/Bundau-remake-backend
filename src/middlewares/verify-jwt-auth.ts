@@ -30,7 +30,7 @@ export const verifyIsAdmin: RequestHandler = (req, res, next) => {
             next()
         }
         else{
-            return res.status(401).send("Unauthorized. Admin required")
+            return res.status(401).send({message: "Unauthorized. Admin required"})
         }
     } catch (error) {
         next(error)
