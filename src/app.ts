@@ -3,7 +3,9 @@ import * as dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import { apiRoutes } from "./routes/api-route"
-import { connectDB } from "./config/connectDB";
+import { connectDB } from "./config/connectDB"
+import cookieParser from "cookie-parser"
+
 
 dotenv.config()
 
@@ -19,6 +21,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 app.use(cors())
 app.use(helmet())
+app.use(cookieParser());
 
 // connect to DB
 connectDB()
