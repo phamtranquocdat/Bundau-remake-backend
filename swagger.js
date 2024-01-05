@@ -1,11 +1,12 @@
 const swaggerAutogen = require('swagger-autogen')();
-
+const dotenv = require('dotenv');
+dotenv.config()
 const doc = {
   info: {
     title: 'My API',
     description: 'Description'
   },
-  host: 'localhost:5000/api'
+  host: `${process.env.SERVER_HOST}/api`
 };
 
 const outputFile = './swagger-output.json';
@@ -16,4 +17,3 @@ root file where the route starts, such as index.js, app.js, routes.js, etc ... *
 
 swaggerAutogen(outputFile, routes, doc);
 
-console.log("Done")
