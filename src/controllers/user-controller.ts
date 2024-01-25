@@ -1,9 +1,9 @@
 import { CookieOptions, RequestHandler } from "express"
 import { User } from "../models/user-model"
 import { hashPassword, comparePassword } from "../services/handle-password";
-import { GenToken } from "../services/gen-token";
+import { genToken } from "../services/gen-token";
 
-export const GetAllUsers: RequestHandler = async (req, res, next) => {
+export const getAllUsers: RequestHandler = async (req, res, next) => {
     try {
         const users = await User.find().select("-password");
         return res.status(200).json({users})
@@ -13,7 +13,7 @@ export const GetAllUsers: RequestHandler = async (req, res, next) => {
     }
 }
 
-export const GetOneUser: RequestHandler = (req, res, next) => {
+export const getOneUser: RequestHandler = (req, res, next) => {
     try {
         res.json({mess: "Get one user"})
     } catch (error) {
@@ -22,7 +22,7 @@ export const GetOneUser: RequestHandler = (req, res, next) => {
     }
 }
 
-export const UpdateUser: RequestHandler = (req, res, next) => {
+export const updateUser: RequestHandler = (req, res, next) => {
     try {
         res.json({mess: "Update user"})
     } catch (error) {
@@ -53,7 +53,7 @@ export const Register: RequestHandler = async (req, res, next) => {
             avatarUrl: avatarUrl
         })
         
-        const token = GenToken({user_id: newUser._id, is_admin: newUser.isAdmin})
+        const token = genToken({user_id: newUser._id, is_admin: newUser.isAdmin})
 
         let cookieParams: CookieOptions = {
             httpOnly: true,
@@ -87,7 +87,7 @@ export const Login: RequestHandler = async (req, res, next) => {
                 secure: process.env.NODE_ENV === "production",
                 sameSite: "strict",
             };
-            const token = GenToken({user_id: user._id, is_admin: user.isAdmin})
+            const token = genToken({user_id: user._id, is_admin: user.isAdmin})
             const {password, ...public_info} = user.toJSON();
             return res.status(200).cookie("token",token,cookieParams).json({message: "login successfully", user: {public_info}})
         }else{

@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import { Product } from "../models/product-model";
 
-export const GetAllProducts: RequestHandler = async (req, res, next) => {
+export const getAllProducts: RequestHandler = async (req, res, next) => {
     try {
         const products = await Product.find()
         return res.status(200).json({products})
@@ -11,7 +11,7 @@ export const GetAllProducts: RequestHandler = async (req, res, next) => {
     }
 }
 
-export const CreateProduct: RequestHandler = async (req, res, next) => {
+export const createProduct: RequestHandler = async (req, res, next) => {
     try {
         const {name, description, price, imageUrl} = req.body
 
@@ -36,7 +36,7 @@ export const CreateProduct: RequestHandler = async (req, res, next) => {
     }
 }
 
-export const GetOneProduct: RequestHandler = (req, res, next) => {
+export const getOneProduct: RequestHandler = (req, res, next) => {
     try {
         res.json({mess: "Get one Product"})
     } catch (error) {
@@ -45,7 +45,7 @@ export const GetOneProduct: RequestHandler = (req, res, next) => {
     }
 }
 
-export const UpdateProduct: RequestHandler = (req, res, next) => {
+export const updateProduct: RequestHandler = (req, res, next) => {
     try {
         res.json({mess: "Update Product"})
     } catch (error) {
@@ -54,7 +54,7 @@ export const UpdateProduct: RequestHandler = (req, res, next) => {
     }
 }
 
-export const RemoveProduct: RequestHandler = (req, res, next) => {
+export const removeProduct: RequestHandler = (req, res, next) => {
     try {
         res.json({mess: "Remove Product"})
     } catch (error) {
