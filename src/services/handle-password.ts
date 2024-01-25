@@ -1,9 +1,9 @@
 import * as bcrypt from "bcryptjs";
 
-const salt = bcrypt.genSaltSync(10)
+const saltRound = 10
 
 export const hashPassword = (password: string) => {
-    return bcrypt.hashSync(password, salt as string)
+    return bcrypt.hashSync(password, saltRound)
 }
 
 export const comparePassword = (inputPass: string, hashPass: string) => {
